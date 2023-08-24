@@ -367,3 +367,119 @@ static void Main(string[] args)
 ___
 
 ## 논리 연산자
+<details>
+<summary>1. 논리 연산자의 종류</summary>
+<div markdown="1">       
+
+
+|**연산자**|**이름**|**형태**|**참의 조건**|
+|:---:|:---:|:---:|:---:|
+|&&|AND 연산자|x && y|좌우가 **모두 참**인 경우에만 결과값이 참|
+|ll|OR 연산자|x ll y|좌우 중 **하나만 참**이어도 결과값은 참|
+|!|NOT 연산자|!x|주어진 값이 참이면 결과값은 거짓, 주어진 값이 거짓이면 결과값은 참|
+
+* 예시 코드
+```C#
+static void Main(string[] args)
+{
+  int age = 0;
+  int haveID = 0;
+  int haveMembership = 0;
+
+  Console.Write("당신의 나이는 18세 이상입니까? (Yes = 1, No = 0) ");
+  age = Convert.ToInt16(Console.ReadLine());
+
+  Console.Write("신분증을 가지고 있습니까? (Yes = 1, No = 0) ");
+  haveID = Convert.ToInt16(Console.ReadLine());
+
+  Console.Write("멤버십을 가지고 있습니까? (Yes = 1, No = 0) ");
+  haveMembership = Convert.ToInt16(Console.ReadLine());
+
+  if(age == 1 && ( haveID == 1 || haveMembership == 1))
+  {
+    Console.WriteLine("입장이 허가되었습니다.");
+  }
+
+  else
+  {
+    Console.WriteLine("입장이 거부되었습니다.");
+  }
+}
+```
+ * 몇 개의 논리 연산자를 사용할 수 있는지에 대한 제한은 없음
+ * 논리 연산자들 사이에 우선순위는 존재하지 않음
+   * 즉, 왼쪽에서 오른쪽으로 쓰여진 순서대로 연산지 이루어짐
+   * 여러 논리 연산자를 함께 사용할 때에는 반드시 괄호를 사용하여 알아보기 쉽게 작성하기
+     
+|**연산자**|**경우의 수**|**결과값**|
+|:--------:|:----------:|:---------:|
+|AND       |true && true|true       |
+|  ''      |true && false|false     |
+|  ''      |false && false|false    |
+|OR        |ture \|\| true  |true   |
+|''|true \|\| false | true |
+|''|false \|\| true | true |
+|''|false \|\| false | false |
+|NOT|!true|false|
+|''|!false|true|
+</div>
+</details>
+
+<details>
+<summary>2. 계산기 프로그램</summary>
+<div markdown="1">       
+
+```C#
+static void Main(string[] args)
+{
+  do
+  {
+    Console.WriteLine("Which calculation do you want to do?");
+    Console.WirteLine("1. addition");
+    Console.WirteLine("2. subtraction");
+    Console.WirteLine("3. multiplication");
+    Console.WirteLine("4. division");
+    Console.WirteLine("5. exit");
+    int choice = Convert.ToInt16(Console.ReadLine());
+
+    if(choice > 4 || choice < 1)
+    { break; }
+
+    else
+    {
+      Console.Write("\nx = ");
+      double x = Convert.ToDouble(Console.ReadLine());
+
+      Console.Write("y = ");
+      double y = Convert.ToDouble(Console.ReadLine());
+
+      switch(choice)
+      {
+        case 1:
+          double addition = x + y;
+          Console.WriteLine("\nx + y = {0}\n", addition);
+          break;
+
+        case 2:
+          double subtraction = x - y;
+          Console.WriteLine("\nx - y = {0}\n", subtraction);
+          break;
+
+        case 3:
+          double multiplication = x * y;
+          Console.WriteLine("\nx * y = {0}\n", multiplication);
+          break;
+
+        case 1:
+          double division = x / y;
+          Console.WriteLine("\nx / y = {0}\n", division);
+          break;
+      }
+    }
+  } while(true);
+}
+```
+ * 조건식 자체를 '참'이라고 설정했기 때문에, 무한루프를 발생시킴
+ * 무한루프를 멈추기 위해  `if(choice > 4 || choice < 1) { break; }` 명령문을 사용함
+</div>
+</details>
