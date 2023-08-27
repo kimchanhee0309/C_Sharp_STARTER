@@ -280,6 +280,21 @@ static void Main()
 <summary>1. 값에 의한 호출(Call by Value)</summary>
 <div markdown="1">       
 
+* 함수를 호출할 때 필요한 매개변수의 값을 함께 넘겨주는 방식
+```C#
+static int CallByValueDemo(int x)
+{
+  return x;
+}
+
+static void Main()
+{
+  Console.Write("정수를 입력하세요: ");
+  int a = Convert.ToInt32(Console.ReadLine());
+
+  Console.WriteLine("입력하신 정수의 값은 {0}입니다.", CallByValueDemo(a));
+}
+```
 </div>
 </details>
 
@@ -287,6 +302,49 @@ static void Main()
 <summary>2. 참조에 의한 호출(Call by Reference)</summary>
 <div markdown="1">       
 
+* 함수에 전달되는 인수를 저장하고 있는 메모리에서 직접 데이터를 가져오는 방식
+  * So, 값에 의한 호출에 비해 함수 연산의 정확성이 보장됨
+  * 함수를 정의할 때와 호출할 때 모두 변수의 이름 앞에 키워드 `ref`를 붙여줘야 함
+```C#
+static void SwapNum_1(int a, int b)
+{
+  //전달 받은 두 수를 서로 바꾼다.
+  int temp = a;
+  a = b;
+  b = temp;
+}
+
+static void SwapNum_2(ref int a, ref int b)
+{
+  //전달 받은 두 수를 서로 바꾼다.
+  int temp = a;
+  a = b;
+  b = temp;
+}
+
+static void Main()
+{
+  int x = 1;
+  int y = 2;
+
+  SwapNum_1(x, y); //값에 의한 호출
+  Console.WriteLine("x의 값은 {0}입니다.", x); //결과값은 1
+  Console.WriteLine("y의 값은 {0}입니다.", y); //결과값은 2
+
+  Console.WriteLine();
+
+  //변수값을 초기화 해준다.
+  x = 1;
+  y = 2;
+
+  SwapNum_2(ref x, ref y); //참조에 의한 호출
+  Console.WriteLnie("x의 값은 {0}입니다.", x); //결과값은 2
+  Console.WriteLine("y의 값은 {0}입니다.", y); //결과값은 1
+}
+```
+* SwampNum_1() 함수의 연산 결과, a,b의 값이 서로 바뀌었을 뿐, 그 결과값이 x와 y에 넘겨지지 않았음
+  * 함수 안에서 스스로 결과값을 출력한다면 결과값이 바뀜 
+* SwapNum_2() 함수는 x,y가 가리키는 메모리에 저장된 값을 참조하는 a,b의 값을 서로 바꾸기 때문에 해당 메모리에 실제로 저장되어있던 값인 x,y까지 서로 바뀌게 되는 것 
 </div>
 </details>
 
@@ -294,6 +352,67 @@ static void Main()
 <summary>3. 결과에 의한 호출(Call by Value Result)</summary>
 <div markdown="1">       
 
+* 참조에 의한 호출과의 차이점
+  * `out` 키워드가 사용된다는 점
+  * 함수에게 인수를 넘겨주는 것이 아닌 함수로부터 값을 가져오는 것이라는 점
+```C#
+static void GetNumbers(out int x, out int y)
+{
+  x = 0;
+  y = 0;
+}
+
+static void Main()
+{
+  Console.Write("a에 저장할 정수값을 입력하세요: ");
+  int a = Convert.ToInt16(Console.ReadLine());
+
+  Console.Write("b에 저장할 정수값을 입력하세요: ");
+  int b = Convert.ToInt16(Console.ReadLine());
+
+  GetNumbers(out a, out b);
+
+  Console.WriteLine("a에 저장된 값은 {0}입니다.", a); //출력값 0
+  Console.WriteLine("b에 저장된 값은 {0}입니다.", b); //출력값 0
+}
+```
+* 어떤 수를 입력하든지 a,b의 값은 '0'
+  * GetNumbers() 함수를 정의할 때 a,b를 0으로 선언했기 때문!
+
+* 함수에 넘겨줄 인수의 값을 배정하지 않아도 오류가 발생하지 않음
+  * 함수 스스로 필요한 값을 가지고 있기 때문
+```C#
+static void GetValue(out int x)
+{
+  x = 1;
+}
+
+static void Main()
+{
+  int a; //인수로 넘겨줄 a에 값이 배정되지 않았다.
+
+  GetValue(out a); //a에 값을 배정하지 않은 상태로 함수를 호출하고 있다.
+
+  Console.WriteLine("a에 저장된 값은 {0}입니다.", a);
+}
+```
+
+* 결과에 의한 호출에 사용될 함수는 반드시 스스로 **매개변수의 기본값**을 가지고 있어야 함(그렇지 않으면 오류 발생)
+```C#
+static void GetValue(out int x)
+{
+  x *= x; //x의 기본값이 정해지지 않은 상태로 연산을 하고 있다 = 오류 발생
+}
+
+static void Main()
+{
+  int a;
+  GatValue(out a);
+  Console.WriteLine("a에 저장된 값은 {0}입니다.", a);
+}
+```
+* 결과에 의한 호출은 사용자의 입력과 무관하게 최초 선언된 값을 유지한다는 면에서 `상수(constant)`와 유사함
+* 이러한 이유로 다른 두 호출 방법에 비해 사용 빈도가 떨어짐
 </div>
 </details>
 
