@@ -275,6 +275,8 @@ static void Main()
 </div>
 </details>
 
+___
+
 ## 함수 호출 방법
 <details>
 <summary>1. 값에 의한 호출(Call by Value)</summary>
@@ -415,5 +417,7 @@ static void Main()
 * 이러한 이유로 다른 두 호출 방법에 비해 사용 빈도가 떨어짐
 </div>
 </details>
+
+___
 
 ## 순환함수와 함수 오버로딩
