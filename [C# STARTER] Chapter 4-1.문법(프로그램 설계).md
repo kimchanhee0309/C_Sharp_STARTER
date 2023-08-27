@@ -421,3 +421,70 @@ static void Main()
 ___
 
 ## 순환함수와 함수 오버로딩
+<details>
+<summary>1. 순환함수</summary>
+<div markdown="1">       
+
+* 필요한 경우 자기 자신을 호출하는 함수를 순환함수 or 재귀함수라고 부름
+```C#
+static int Factorial(int a)
+{
+  if(a==1)
+  {
+    return a;
+  }
+
+  else
+  {
+    //Factorial() 함수 안에서 다시 Factorial() 함수를 호출하고 있다.
+    return a * Factorial(--a);
+  }
+}
+
+static void Main()
+{
+  Console.Write("팩토리얼을 계산하고자 하는 수를 입력하세요: ");
+  int a = Convert.ToInt32(Console.ReadLine());
+
+  Console.WriteLine("{0}! = {1}", a, Factorial(a));
+}
+```
+* 함수에 전달된 인수가 '1'이 아닌 경우 계속해서 자기 자신을 반복 호출하고 있음
+* 순환함수를 사용하는 경우 무한 루프에 빠지기 쉽기 때문에 명확한 종료 조건을 제시해야함
+</div>
+</details>
+
+<details>
+<summary>2. 함수 오버로딩(method overloading)</summary>
+<div markdown="1">       
+
+* 이미 존재하는 함수의 이름과 같은 이름의 함수를 만드는 것을 뜻함
+  * 같은 이름의 함수여도 함수의 `시그니처`까지 똑같은 것은 허용하지 않음(시그니처=매개변수의 구조)
+```C#
+static void Print(int a)
+{
+  Console.WriteLine("입력된 정수값은 {0}입니다.", a);
+}
+
+static void Print(double a)
+{
+  Console.WriteLine("입력된 실수값은 {0}입니다.", a);
+}
+
+static void Main()
+{
+  Console.Write("정수를 입력하세요: ");
+  int x = Convert.ToInt32(Console.ReadLine());
+
+  Print(x);
+
+  Console.Write("실수를 입력하세요: ");
+  double y = Convert.ToDouble(Console.ReadLine());
+
+  //Print(x) 떄와는 다른 함수가 호출된다.
+  Print(y);
+}
+```
+* 매개변수의 정의가 서로 다르면(시그니처가 다르면) 같은 이름을 가진 함수도 존재할 수 있음
+</div>
+</details>
