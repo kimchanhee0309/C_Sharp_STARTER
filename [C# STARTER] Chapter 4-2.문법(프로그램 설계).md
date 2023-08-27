@@ -90,7 +90,7 @@ static void PrintVars()
   string str = "James";
 
   //지역 변수의 출력
-  Console.WriteLine("num = {0}\str = {1}", num, str);
+  Console.WriteLine("num = {0}\nstr = {1}", num, str);
 }
 
 static void Main()
@@ -99,6 +99,6 @@ static void Main()
 
   /*전역 변수의 출력 : 값이 배정되어 있지 않다.
     그럼에도 오류가 발생하지는 않는다. */
-  Consloe.WriteLine("num = {0}\str = {1}", num, str);
+  Consloe.WriteLine("num = {0}\nstr = {1}", num, str);
 }
 ```
