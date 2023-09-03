@@ -108,7 +108,48 @@ class Person
 
       else
       { name = value; }
-  음
+    }
+
+    get
+    { return name; }
+  }
+
+  public int Age
+  {
+    set
+    { age = value; }
+
+    get
+    {
+      if(age <= 0)
+      {
+        throw new ArgumentException("나이의 입력이 올바르지 않습니다.");
+      }
+
+      else
+      { return age; }
+    }
+  }
+}
+
+class Program
+{
+  static void Main()
+  {
+    Person p = new Person();
+
+    Console.Write("이름을 입력하세요: ");
+    p.Name = Console.ReadLine();
+
+    Console.Write("나이를 입력하세요: ");
+    p.Age = Convert.ToInt32(COnsole.ReadLine());
+
+    Console.WriteLine("안녕하세요. {0}씨", p.Name);
+    Console.WriteLine("당신의 나이는 {0}살이군요.", p.Age);
+  }
+}
+```
+* 프로퍼티 안에서도 일반 함수처럼 다양한 명령문을 사용할 수 있음
 
 #### 자동 구현 프로퍼티
 </div>
