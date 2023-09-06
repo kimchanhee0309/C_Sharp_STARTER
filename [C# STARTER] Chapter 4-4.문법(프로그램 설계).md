@@ -64,7 +64,7 @@ class Program
 ```C#
 class Person
 {
-  prinvate string name = "James";
+  private string name = "James";
 
   public void setName(string userName) //일반적인 함수 선언
   { name = userName; }
@@ -151,7 +151,57 @@ class Program
 ```
 * 프로퍼티 안에서도 일반 함수처럼 다양한 명령문을 사용할 수 있음
 
-#### 자동 구현 프로퍼티
+#### 자동 구현 프로퍼티(auto implemented property)
+```C#
+class Person
+{
+  public string Name
+  { set; get; }
+}
+```
+* 자동 구현 프로퍼티를 사용함으로써 'private string name'이라고 따로 변수를 선언하지도 않았다는 사실에 주목
+* 아래 코드는 위 코드와 똑같은 작업을 수행함
+```C#
+class Person
+{
+  //일반적인 경우 private으로 정의되는 변수를 따로 만들어줘야 함
+  private string name;
+
+  public string Name
+  {
+    set { name = value; }
+    get { return name; }
+  }
+}
+```
+* 자동 구현 프로퍼티를 사용할 때도 변수의 기본값을 설정할 수는 있음
+ * 기본값 설정 방법
+```C#
+class Person
+{
+  public string Name { set; get; } = "James"
+}
+```
+* 자동 구현 프로퍼티 예시
+```C#
+class Person
+{
+  //자동 구현 프로퍼티 선언
+  public string Name { set; get; } = "James";
+}
+
+class Program
+{
+  static void Main()
+  {
+    Person p = new Person();
+
+    p.setName("Bob"); //private으로 정의된 변수(Name)의 값을 바꾸고 있다.
+
+    Console.WRiteLine("안녕하세요." + p.getName() + "씨!");
+  }
+}
+```
 </div>
 </details>
 
@@ -161,5 +211,28 @@ ___
 <summary>this 키워드</summary>
 <div markdown="1">       
 
+* 클래스에서 선언한 멤버 변수와 함수의 매개변수는 같은 이름을 가질 수 있음
+ * 어떤 매개변수와 멤버 변수가 상호 작용하는지 알아보기 쉽다는 장점
+ * 같은 이름을 가진 두 개의 변수가 존재한다는 것은 코드를 읽기 불편하게 만들 수 있음
+* 이런 단점을 극복하는 방법이 **this 키워드**임
+ * 즉, 클래스의 멤버버 변수 앞에 `this.` 라고 적어줌으로써 함수의 매개변수와 구별이 되도록 하는 것
+```C#
+class BankAccount
+{
+  private double money = 0;
+
+  public void Deposit(double money)
+  { this.money += money; }
+
+  public void Withdraw(double money)
+  { this.money -= money; }
+
+  public double GetBalance()
+  { return this.money; }
+}
+```
+* money라는 멤버 변수 이름과 매개변수 이름이 똑같은 점을 알 수 있음
+* this 키워드를 사용하여 어느 것이 멤버 변수이고 매개변수인지 쉽게 구별 가능함
+ * this는 멤버 변수 앞에 붙임
 </div>
 </details>
