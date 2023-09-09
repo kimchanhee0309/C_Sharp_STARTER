@@ -47,7 +47,7 @@ static void Main()
   for(int i = 0; i < 5; i++)
   {
     //사용자 입력을 배열에 저장
-    Console.Wirte("Give me any integer: ");
+    Console.Write("Give me any integer: ");
     myIntegers[i] = Convert.ToInt32(Console.ReadLine());
   }
 
