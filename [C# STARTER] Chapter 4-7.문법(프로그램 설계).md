@@ -67,6 +67,68 @@ ___
 <summary>2. foreach 문</summary>
 <div markdown="1">       
 
+* **foreach문** : 배열의 특화된 반복문
+  >foreach(자료형 변수명 in 배열명)
+  >
+  >{
+  >
+  >  statement(s)...
+  >
+  >}
+* foreach 문 특징
+  * 일반적인 반복문이 가지는 카운터를 가지지 않음
+  * 대신, foreach 문은 자신만의 변수를 가지게 됨
+    * 이것은 foreach 문이 배열에 저장된 데이터값을 찾아내어 그것을 자신의 변수에 담아 나오는 방식으로 작동하기 때문임
+    * So, foreach 문에서 **선언한 변수**와 **배열에 저장된 데이터의 자료형**이 서로 **일치**해야만 함
+  * 특히 배열에 저장된 데이터가 총 몇 개인지 알 수 없을 때 진가를 발휘함
+    * foreach 문 스스로 데이터가 저장된 부분의 끝까지 반복문을 실행하기 때문임
+    * So, 다른 반복문과 달리 **종료 조건을 제시하지 않음**
+* 예시
+```C#
+static void Main()
+{
+  int[] myIntegers = new int[10];
+  int sum = 0;
+
+  for(int x = 0; x < 5; x++)
+  {
+    Console.Write("정수를 입력하세요: ");
+    myIntegers[x] = Convert.ToInt32(Console.ReadLine());
+  }
+
+  /* foreach 문에는 반복문의 종료 조건이 주어지고 있지 않고
+     myIntegers 뒤에 배열을 표시하는 []가 붙어 있지 않다 */
+  foreach(int y in myIntegers)
+  {
+    sum += y;
+  }
+
+  Console.WriteLine("입력한 모든 숫자의 합은 {0}입니다." sum);
+}
+```
+* 최초 선언된 배열의 크기는 '10'이지만, 실제로는 5개의 자료만 입력하고 잇음
+* 그럼에도 불구하고 foreach 문은 오류 없이 저장된 데이터를 모두 가져옴
+
+```C#
+static void Main()
+{
+  string[] studentNames = new string[10];
+
+  for(int x = 0; x < 5; x++)
+  {
+    Console.Write("학생의 이름을 입력하세요: ");
+    studentNames[x] = Console.ReadLine();
+  }
+
+  //foreach 문은 카운터를 가지지 않는다.
+  foreach(int y in studentNames)
+  {
+    //foreach 문의 변수를 카운터처럼 사용하고 있다 : 오류의 원인
+    Console.WriteLine("The name saved in array is {0}", studentNames[y]);
+  }
+}
+```
+* foreach 문의 변수를 일반 반복문의 카운터처럼음
 </div>
 </details>
 
