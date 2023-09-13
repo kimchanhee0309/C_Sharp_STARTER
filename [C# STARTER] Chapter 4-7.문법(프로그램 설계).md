@@ -284,5 +284,79 @@ ___
 <summary>5. 배열 프로퍼티와 집계 함수</summary>
 <div markdown="1">       
 
+ #### 배열 관련 프로퍼티
+  
+프로퍼티 | 기능 
+------------ | ------------- 
+IsFixedSize | 배열이 고정된 크기를 가졌는지 확인, 반환값 : 참or거짓 
+IsReadOnly | 배열이 읽기전용인지 즉, 수정할 수 없는 지 확인, 반환값 : 참or거짓
+Length | 배열의 크기를 확인, 반환값 : 32bit 정수값
+LongLength | 배열의 크기를 확인, 반환값 : 64bit 정수값
+Rank | 몇 차원 배열인지 확인
+
+```C#
+static void Main()
+{
+  //1차원 배열의 선언
+  int[] arr1 = new int[5];
+  Console.WriteLine("arr1.IsFixedSize = {0}", arr1.IsFixedSize);
+  Console.WriteLine("arr1.IsReadOnly = {0}", arr1.IsReadOnly;
+  Console.WriteLine("arr1.Length = {0}", arr1.Length);
+  Console.WriteLine("arr1.LongLength = {0}", arr1.LongLength);
+  Console.WriteLine("arr1.Rank = {0}", arr1.Rank);
+  Console.WriteLine();
+
+  //2차원 배열의 선언
+  int[ , ] arr2 = new int[5,3];
+  Console.WriteLine("arr2.IsFixedSize = {0}", arr2.IsFixedSize);
+  Console.WriteLine("arr2.IsReadOnly = {0}", arr2.IsReadOnly;
+  Console.WriteLine("arr2.Length = {0}", arr2.Length);
+  Console.WriteLine("arr2.LongLength = {0}", arr2.LongLength);
+  Console.WriteLine("arr2.Rank = {0}", arr2.Rank);
+  Console.WriteLine();
+
+  //불규칙 배열의 선언: 결과값을 눈여겨 보자
+  string[][] arr3 = new string[5][];
+  Console.WriteLine("arr3.IsFixedSize = {0}", arr3.IsFixedSize);
+  Console.WriteLine("arr3.IsReadOnly = {0}", arr3.IsReadOnly;
+  Console.WriteLine("arr3.Length = {0}", arr3.Length);
+  Console.WriteLine("arr3.LongLength = {0}", arr3.LongLength);
+  Console.WriteLine("arr3.Rank = {0}", arr3.Rank);
+  Console.WriteLine();
+}
+```
+
+#### 배열 관련 집계 함수
+
+함수 | 기능 
+------------ | ------------- 
+배열명.Min() | 배열에 저장된 값 중 가장 작은 값을 반환한다.
+배열명.Max() | 배열에 저장된 값 중 가장 큰 값을 반환한다.
+배열명.Sum() | 배열에 저장된 값의 총합을 계산하여 반환한다.
+배열명.Average() | 배열에 저장된 값의 평균을 계산하여 반환한다.
+배열명.Count() | 배열에 저장된 데이터의 총 개수를 계산하여 반환한다.
+
+```C#
+using System;
+using System.Linq;
+
+namespace ArrayMethods
+{
+  class Program
+  {
+    static void Main()
+    {
+      int[] arr4 = new int[5] { 21, 98, 43, 27, 13 };
+
+      Console.WriteLine("배열에서 가장 큰 수는 {0}입니다.", arr4.Max());
+      Console.WriteLine("배열에서 가장 작은 수는 {0}입니다.", arr4.Min());
+      Console.WriteLine("배열에 저장된 값의 총 합은 {0}입니다.", arr4.Sum());
+      Console.WriteLine("배열에 저장된 값의 평균은 {0}입니다.", arr4.Average());
+      Console.WriteLine("배열에 저장된 데이터의 개수는 {0}입니다.", arr4.Count());
+    }
+  }
+}
+```
+
 </div>
 </details>
