@@ -45,6 +45,46 @@ static void Main()
 }
 ```
 ### 제네릭 클래스
+* 자료를 적재하고자 할 때 주로 쓰임
+* 예시 코드
+```C#
+class GenClass<T> //클래스를 제네릭으로 선언하고 있다.
+{
+  int index = 0; //멤버 변수 모두가 제네릭으로 선언되어야 하는 것은 아니다.
+  T[] TArray = new T[10];
+
+  public void Push(T item) //함수의 매개변수를 제네릭으로 선언하고 있다.
+  {
+    TArray[index++] = item; //입력을 받은 후 인덱스 값을 1 증가시킨다.
+  }
+
+  public T Pop(int x) //함수의 반환값을 제네릭으로 선언하고 있다.
+  {
+    return TArray[x];
+  }
+}
+
+class Program
+{
+  static void Main()
+  {
+    //인스턴스를 생성할 때 원하는 자료형을 밝혀야 한다.
+    GenClass<int> intArray = new GenClass<int>();
+    GenClass<char> charArray = new GenClass<char>();
+
+    intArray.Push(3);
+    intArray.Push(6);
+    charArray.Push('A');
+    charArray.Push('B');
+
+    Console.WriteLine("두 번째 입력값은 각각 {0}과 \'{1}\'입니다.",
+                       intArray.Pop(1), charArray.Pop(1));
+  }
+}
+```
+* 클래스 자체를 제네릭으로 선언하면 해당 클래스는 최소 1개 이상의 제네릭 멤버를 가져야 함
+* 클래스의 인스턴스를 생성할 때 원하는 자료형을 선언함
+* 제네릭은 변ㅂ수나 함수뿐만 아니라 클래스와 인터페이스에도 두루 사용할 수 있음
 </div>
 </details>
 
@@ -54,5 +94,7 @@ ___
 <summary>12. 리스트(List)</summary>
 <div markdown="1">       
 
+### 리스트
+### 정렬된 리스트
 </div>
 </details>
